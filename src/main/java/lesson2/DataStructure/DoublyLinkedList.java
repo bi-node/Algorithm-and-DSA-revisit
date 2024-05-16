@@ -30,8 +30,10 @@ public class DoublyLinkedList<T> {
     }
 
     public void insert(T data, int pos){
-        if(pos>size) System.out.println("Invalid Position");
-        if(pos==size-1) {add(data); return;}
+        if(pos>size)
+        {System.out.println("Invalid Position");
+            return;}
+        if(pos==size) {add(data); return;}
         Node<T> temp=head;
         for(int i=0; i<pos; i++)
         {
@@ -42,7 +44,8 @@ public class DoublyLinkedList<T> {
         newNode.next=temp.next;
         temp.next=newNode;
         newNode.previous=temp;
-        newNode.next.previous=newNode;
+        if(newNode.next != null) // Corrected: added condition to avoid NullPointerException
+            newNode.next.previous = newNode;
         size++;
 
 
@@ -66,6 +69,8 @@ public class DoublyLinkedList<T> {
         }
 
         temp.next=null;
+
+        size--;
     }
 
     public void print() {
@@ -99,6 +104,9 @@ public class DoublyLinkedList<T> {
         dll.print();
         dll.insert("Pineapple", 2);
         dll.print();
+        dll.insert("Mango", 3);
+        dll.print();
+
 
 
     }
